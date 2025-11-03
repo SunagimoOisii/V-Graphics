@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="include\ISampleApp.h" />
+    <ClInclude Include="include\TriangleApp.h" />
+    <ClInclude Include="include\core\VulkanContext.h" />
+    <ClInclude Include="include\core\Swapchain.h" />
+    <ClInclude Include="include\core\ISurfaceProvider.h" />
+    <ClInclude Include="include\core\GLFWSurfaceProvider.h" />
+    <ClInclude Include="include\core\CommandBuffer.h" />
+    <ClInclude Include="include\core\ImageBarrier.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\core\VulkanContext.cpp" />
+    <ClCompile Include="src\core\Swapchain.cpp" />
+    <ClCompile Include="src\core\GLFWSurfaceProvider.cpp" />
+    <ClCompile Include="src\core\CommandBuffer.cpp" />
+    <ClCompile Include="src\TriangleApp.cpp" />
+    <ClCompile Include="src\core\ImageBarrier.cpp" />
+  </ItemGroup>
+</Project>
