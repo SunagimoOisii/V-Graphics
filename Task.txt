@@ -1,0 +1,2 @@
+〇Chapter1 を理解する
+〇CommandBuffer について Get(), operator どちらかに一本化するべきか考える

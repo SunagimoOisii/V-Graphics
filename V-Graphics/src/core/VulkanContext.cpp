@@ -192,7 +192,7 @@ void VulkanContext::CreateInstance(const char* appName)
     if (vkCreateInstance(&createInfo, nullptr, &m_vkInstance) != VK_SUCCESS)
     {
         throw std::runtime_error("Failed to create instance");
-    }   
+    }
 }
 
 void VulkanContext::CreateSurface()
