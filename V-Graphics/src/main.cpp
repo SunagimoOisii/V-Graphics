@@ -1,8 +1,10 @@
 #include <Windows.h>
+#include <filesystem>
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 
+#include "core/AssetPath.h"
 #include "core/VulkanContext.h"
 #include "core/GLFWSurfaceProvider.h"
 #include "TriangleApp.h"
@@ -12,6 +14,15 @@ int __stdcall wWinMain(_In_ HINSTANCE hInstance,
 	_In_ LPWSTR lpCmdLine,
 	_In_ int nCmdShow)
 {
+	//exeのあるディレクトリをカレントディレクトリに設定
+	wchar_t exePath[MAX_PATH];
+	GetModuleFileNameW(nullptr, exePath, MAX_PATH);
+	std::filesystem::path exeDir = std::filesystem::path(exePath).parent_path();
+	SetCurrentDirectoryW(exeDir.c_str());
+
+	std::filesystem::path assetDir = exeDir / "../../assets";
+	SetAssetRootPath(assetDir);
+
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 

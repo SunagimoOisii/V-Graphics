@@ -9,6 +9,11 @@
     <ClInclude Include="include\core\GLFWSurfaceProvider.h" />
     <ClInclude Include="include\core\CommandBuffer.h" />
     <ClInclude Include="include\core\ImageBarrier.h" />
+    <ClInclude Include="include\core\BufferResource.h" />
+    <ClInclude Include="include\core\AssetPath.h" />
+    <ClInclude Include="include\core\ShaderLoader.h" />
+    <ClInclude Include="include\core\GraphicsPipelineBuilder.h" />
+    <ClInclude Include="include\core\GPUResourceBase.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
@@ -18,5 +23,9 @@
     <ClCompile Include="src\core\CommandBuffer.cpp" />
     <ClCompile Include="src\TriangleApp.cpp" />
     <ClCompile Include="src\core\ImageBarrier.cpp" />
+    <ClCompile Include="src\core\BufferResource.cpp" />
+    <ClCompile Include="src\core\AssetPath.cpp" />
+    <ClCompile Include="src\core\ShaderLoader.cpp" />
+    <ClCompile Include="src\core\GraphicsPipelineBuilder.cpp" />
   </ItemGroup>
 </Project>

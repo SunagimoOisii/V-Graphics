@@ -362,6 +362,21 @@ void VulkanContext::CreateDebugMessenger()
     m_pfnSetDebugUtilsObjectNameEXT = (PFN_vkSetDebugUtilsObjectNameEXT)vkGetInstanceProcAddr(m_vkInstance, "vkSetDebugUtilsObjectNameEXT");
 }
 
+uint32_t VulkanContext::FindMemoryType(const VkMemoryRequirements& requirements, VkMemoryPropertyFlags properties) const
+{
+    for (uint32_t i = 0; i < m_memoryProperties.memoryTypeCount; i++)
+    {
+        const bool isTypeCompatible = (requirements.memoryTypeBits & (1 << i)) != 0;
+        const bool hasDesiredProperties = (m_memoryProperties.memoryTypes[i].propertyFlags & properties) == properties;
+        if (isTypeCompatible && hasDesiredProperties)
+        {
+            //メモリプロパティを満たし、memoryTypeBitsに含まれている
+            return i;
+        }
+    }
+    throw std::runtime_error("Failed to find suitable memory type!");
+}
+
 void VulkanContext::SetDebugObjectName(void* objectHandle, VkObjectType type, const char* name)
 {
 #if _DEBUG || DEBUG
