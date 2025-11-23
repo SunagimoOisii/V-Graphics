@@ -14,6 +14,9 @@
     <ClInclude Include="include\core\ShaderLoader.h" />
     <ClInclude Include="include\core\GraphicsPipelineBuilder.h" />
     <ClInclude Include="include\core\GPUResourceBase.h" />
+    <ClInclude Include="include\SimpleCubeApp.h" />
+    <ClInclude Include="include\core\ImageResource.h" />
+    <ClInclude Include="include\core\ResourceUploader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
@@ -27,5 +30,8 @@
     <ClCompile Include="src\core\AssetPath.cpp" />
     <ClCompile Include="src\core\ShaderLoader.cpp" />
     <ClCompile Include="src\core\GraphicsPipelineBuilder.cpp" />
+    <ClCompile Include="src\SimpleCubeApp.cpp" />
+    <ClCompile Include="src\core\ImageResource.cpp" />
+    <ClCompile Include="src\core\ResourceUploader.cpp" />
   </ItemGroup>
 </Project>

@@ -79,7 +79,7 @@ private:
 	void CreateLogicalDevice();
 	void CreateDebugMessenger();
 	void CreateCommandPool();
-	void CreateDescriptorPool() {};
+	void CreateDescriptorPool();
 
 	void CreateFrameContexts();
 	void DestroyFrameContexts();

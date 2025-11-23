@@ -8,6 +8,7 @@
 #include "core/GraphicsPipelineBuilder.h"
 #include "core/ShaderLoader.h"
 #include "core/AssetPath.h"
+#include "SimpleCubeApp.h"
 
 void TriangleApp::OnInitialize()
 {

@@ -101,6 +101,29 @@ std::shared_ptr<CommandBuffer> VulkanContext::CreateCommandBuffer()
     return std::make_shared<CommandBuffer>(commandBuffer);
 }
 
+VkDescriptorSet VulkanContext::AllocateDescriptorSet(VkDescriptorSetLayout layout)
+{
+    VkDescriptorSetAllocateInfo allocInfo{
+        .sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO,
+        .descriptorPool = m_descriptorPool,
+        .descriptorSetCount = 1,
+        .pSetLayouts = &layout,
+    };
+
+    VkDescriptorSet descriptorSet;
+    if (vkAllocateDescriptorSets(m_vkDevice, &allocInfo, &descriptorSet) != VK_SUCCESS)
+    {
+        throw std::runtime_error("failed to allocate descriptor set!");
+    }
+
+    return descriptorSet;
+}
+
+void VulkanContext::FreeDescriptorSet(VkDescriptorSet descriptorSet)
+{
+    vkFreeDescriptorSets(m_vkDevice, m_descriptorPool, 1, &descriptorSet);
+}
+
 VkResult VulkanContext::AcquireNextImage()
 {
     auto* frame = GetCurrentFrameContext();
@@ -249,6 +272,9 @@ void VulkanContext::CreateLogicalDevice()
         VK_KHR_SWAPCHAIN_EXTENSION_NAME,
     };
 
+    //上下方向を合わせるために有効とする
+    deviceExtensions.push_back(VK_KHR_MAINTENANCE1_EXTENSION_NAME);
+
     float priority = 1.0f;
     VkDeviceQueueCreateInfo queueInfo{};
     queueInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
@@ -318,6 +344,29 @@ void VulkanContext::CreateCommandPool()
     commandPoolCI.queueFamilyIndex = m_graphicsQueueFamilyIndex;
     commandPoolCI.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
     vkCreateCommandPool(m_vkDevice, &commandPoolCI, nullptr, &m_commandPool);
+}
+
+void VulkanContext::CreateDescriptorPool()
+{
+    std::vector<VkDescriptorPoolSize> poolSizes = {
+        {
+            .type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
+            .descriptorCount = 4096
+        },
+        // 他のディスクリプタも必要になったらここに追加する
+    };
+    VkDescriptorPoolCreateInfo poolInfo{
+        .sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO,
+        .flags = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT,
+        .maxSets = 4096,
+        .poolSizeCount = uint32_t(poolSizes.size()),
+        .pPoolSizes = poolSizes.data(),
+    };
+
+    if (vkCreateDescriptorPool(m_vkDevice, &poolInfo, nullptr, &m_descriptorPool) != VK_SUCCESS)
+    {
+        throw std::runtime_error("failed to create descriptor pool!");
+    }
 }
 
 VKAPI_ATTR VkBool32 VKAPI_CALL VulkanDebugCallback(

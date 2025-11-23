@@ -136,3 +136,69 @@ public:
         return buffer;
     }
 };
+
+class StagingBuffer : public BufferResource<StagingBuffer>
+{
+    friend class GPUResourceBase<StagingBuffer>;
+private:
+    StagingBuffer() = default;
+
+public:
+    virtual ~StagingBuffer() = default;
+
+    virtual void* Map() override;
+    virtual void Unmap() override;
+
+    bool Initialize(VkDeviceSize size);
+
+    // Create, Initialize‚ğ1“x‚Åˆ—‚·‚é‚½‚ß‚Ìì¬ŠÖ”
+    static std::shared_ptr<StagingBuffer> Create(VkDeviceSize size)
+    {
+        auto buffer = GPUResourceBase::Create();
+        if (!buffer->Initialize(size)) { return nullptr; }
+        return buffer;
+    }
+};
+
+class IndexBuffer : public BufferResource<IndexBuffer>
+{
+    friend class GPUResourceBase<IndexBuffer>;
+private:
+    IndexBuffer() = default;
+public:
+    virtual ~IndexBuffer() = default;
+
+    virtual void* Map() override;
+    virtual void Unmap() override;
+
+    bool Initialize(VkDeviceSize size, VkMemoryPropertyFlags memProps);
+
+    // Create, Initialize‚ğ1“x‚Åˆ—‚·‚é‚½‚ß‚Ìì¬ŠÖ”
+    static std::shared_ptr<IndexBuffer> Create(VkDeviceSize size, VkMemoryPropertyFlags memProps)
+    {
+        auto buffer = GPUResourceBase::Create();
+        if (!buffer->Initialize(size, memProps)) { return nullptr; }
+        return buffer;
+    }
+};
+
+class UniformBuffer : public BufferResource<UniformBuffer>
+{
+    friend class GPUResourceBase<UniformBuffer>;
+public:
+    UniformBuffer() = default;
+    virtual ~UniformBuffer() = default;
+
+    virtual void* Map() override;
+    virtual void Unmap() override;
+
+    bool Initialize(VkDeviceSize size);
+
+    // Create, Initialize‚ğ1“x‚Åˆ—‚·‚é‚½‚ß‚Ìì¬ŠÖ”
+    static std::shared_ptr<UniformBuffer> Create(VkDeviceSize size)
+    {
+        auto buffer = GPUResourceBase::Create();
+        if (!buffer->Initialize(size)) { return nullptr; }
+        return buffer;
+    }
+};

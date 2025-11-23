@@ -7,7 +7,7 @@
 #include "core/AssetPath.h"
 #include "core/VulkanContext.h"
 #include "core/GLFWSurfaceProvider.h"
-#include "TriangleApp.h"
+#include "SimpleCubeApp.h"
 
 int __stdcall wWinMain(_In_ HINSTANCE hInstance,
 	_In_opt_ HINSTANCE hPrevInstance,
@@ -32,7 +32,7 @@ int __stdcall wWinMain(_In_ HINSTANCE hInstance,
 	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 	//ウィンドウ作成
-	GLFWwindow* window = glfwCreateWindow(1280, 720, "Hello", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(1280, 720, "DirectX999999999999", nullptr, nullptr);
 	GLFWSurfaceProvider surfaceProvider(window);
 
 	//必要な拡張機能を取得し、Vulkan初期化
@@ -50,7 +50,7 @@ int __stdcall wWinMain(_In_ HINSTANCE hInstance,
 	vulkanCtx.RecreateSwapchain();
 
 	//アプリケーション初期化
-	TriangleApp app{};
+	SimpleCubeApp app{};
 	app.OnInitialize();
 
 	//メッセージループ
